@@ -22,6 +22,8 @@ export function Header({ onOpenOrderModal }: HeaderProps) {
   const navLinks = [
     { label: "Послуги", href: "#services" },
     { label: "Матеріали", href: "#materials" },
+    { label: "Наші роботи", href: "#works" },
+    { label: "MakerWorld", href: "#makerworld" },
     { label: "Калькулятор", href: "#calculator" },
     { label: "Як замовити", href: "#process" },
     { label: "Контакти", href: "#contacts" },
@@ -54,7 +56,7 @@ export function Header({ onOpenOrderModal }: HeaderProps) {
             </a>
 
             {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-6">
+            <nav className="hidden lg:flex items-center gap-5">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
@@ -88,7 +90,7 @@ export function Header({ onOpenOrderModal }: HeaderProps) {
             </div>
 
             {/* Mobile menu trigger */}
-            <div className="flex md:hidden items-center gap-2">
+            <div className="flex lg:hidden items-center gap-2">
               <button
                 onClick={onOpenOrderModal}
                 className="px-3 py-1.5 text-xs font-semibold text-white bg-zinc-900 rounded-lg"
@@ -109,7 +111,7 @@ export function Header({ onOpenOrderModal }: HeaderProps) {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl pt-24 px-6 md:hidden flex flex-col justify-between pb-8">
+        <div className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl pt-24 px-6 lg:hidden flex flex-col justify-between pb-8">
           <div className="flex flex-col gap-3">
             {navLinks.map((link) => (
               <a

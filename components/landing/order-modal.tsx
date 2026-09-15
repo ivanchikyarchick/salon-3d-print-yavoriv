@@ -14,6 +14,9 @@ interface OrderModalProps {
     pricePerGram?: number;
     quantity?: number;
     estimatedPrice?: number;
+    sourceUrl?: string;
+    profileTitle?: string;
+    printTimeSeconds?: number;
   } | null;
 }
 
@@ -30,8 +33,14 @@ export function OrderModal({ isOpen, onClose, initialData }: OrderModalProps) {
       if (initialData.taskType) setTask(initialData.taskType);
       if (initialData.material) setMaterial(initialData.material);
       if (initialData.estimatedPrice) {
+        const printTime = initialData.printTimeSeconds
+          ? `${Math.floor(initialData.printTimeSeconds / 3600)} год ${Math.round((initialData.printTimeSeconds % 3600) / 60)} хв`
+          : null;
         setDetails(
-          `Розрахунок калькулятора: ~${initialData.estimatedPrice} грн (${initialData.quantity || 1} шт, ${initialData.weightGrams || 0} г/шт, ${initialData.pricePerGram || 0} грн/г)`
+          `Розрахунок калькулятора: ~${initialData.estimatedPrice} грн (${initialData.quantity || 1} шт, ${initialData.weightGrams || 0} г/шт, ${initialData.pricePerGram || 0} грн/г)` +
+          (initialData.profileTitle ? `\nПрофіль MakerWorld: ${initialData.profileTitle}` : "") +
+          (printTime ? `\nОрієнтовний час: ${printTime}` : "") +
+          (initialData.sourceUrl ? `\nПосилання: ${initialData.sourceUrl}` : "")
         );
       }
     }
