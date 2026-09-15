@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Wrench, FileCode, Cpu, Sparkles, ArrowRight, Box, ScanLine } from "lucide-react";
 
 interface ServicesBentoProps {
@@ -57,16 +58,25 @@ export function ServicesBento({ onOpenOrderModal }: ServicesBentoProps) {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Clean Header */}
-        <div className="max-w-xl mb-12">
-          <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500 block mb-2">
-            Напрямки робіт
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-zinc-950 tracking-tight">
-            Наші послуги
-          </h2>
-          <p className="mt-3 text-zinc-600 text-base">
-            Друкуємо готові моделі, створюємо нові та оцифровуємо фізичні деталі. Вартість моделювання і сканування — 500 грн/год.
-          </p>
+        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-center mb-12">
+          <div className="max-w-xl">
+            <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500 block mb-2">
+              Напрямки робіт
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-zinc-950 tracking-tight">
+              Наші послуги
+            </h2>
+            <p className="mt-3 text-zinc-600 text-base">
+              Друкуємо готові моделі, створюємо нові та оцифровуємо фізичні деталі. Вартість моделювання і сканування — 500 грн/год.
+            </p>
+          </div>
+
+          <figure className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-zinc-100 border border-zinc-200">
+            <Image src="/workshop-scan-preparation.webp" alt="Підготовка деталі до точного 3D-сканування" fill sizes="(min-width: 1024px) 52vw, 100vw" className="object-cover" />
+            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-zinc-950/90 to-transparent px-5 pb-4 pt-12 text-sm font-semibold text-white">
+              Готуємо фізичну деталь до точного 3D-сканування
+            </figcaption>
+          </figure>
         </div>
 
         {/* 4 Clean Cards */}

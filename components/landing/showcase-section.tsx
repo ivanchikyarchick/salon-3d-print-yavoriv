@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const videos = [
   {
     title: "3D-сканування",
@@ -24,24 +22,6 @@ const videos = [
     description: "Перевіряємо поверхню та результат.",
     src: "/workshop-finished-model.mp4",
     poster: "/workshop-finished-model-poster.webp",
-  },
-];
-
-const works = [
-  {
-    title: "Великі функціональні деталі",
-    description: "Друкуємо не лише дрібні елементи, а й габаритні вироби під конкретне завдання.",
-    image: "/workshop-large-part.webp",
-  },
-  {
-    title: "Підготовка до сканування",
-    description: "Маркуємо поверхню, щоб сканер точно відтворив складну геометрію.",
-    image: "/workshop-scan-preparation.webp",
-  },
-  {
-    title: "Декоративний друк",
-    description: "Працюємо з деталізованими моделями та ефектними кольорами матеріалу.",
-    image: "/workshop-finished-piece.webp",
   },
 ];
 
@@ -75,21 +55,6 @@ export function ShowcaseSection() {
               <div className="p-4 text-white">
                 <h3 className="text-sm sm:text-base font-bold">{video.title}</h3>
                 <p className="mt-1 text-xs sm:text-sm text-zinc-400 leading-relaxed">{video.description}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10">
-          {works.map((item) => (
-            <article key={item.title} className="group rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800">
-              <div className="relative overflow-hidden aspect-[4/3] md:aspect-[3/4]">
-                <Image src={item.image} alt={item.title} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/5 to-transparent" />
-                <div className="absolute left-0 right-0 bottom-0 p-5 text-white">
-                  <h3 className="text-lg font-bold">{item.title}</h3>
-                  <p className="mt-1 text-sm text-zinc-300">{item.description}</p>
-                </div>
               </div>
             </article>
           ))}

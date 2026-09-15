@@ -1,6 +1,7 @@
 "use client";
 
-import { Check, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 
 interface MaterialsMatrixProps {
   onSelectMaterialForOrder: (materialName: string) => void;
@@ -62,7 +63,7 @@ export function MaterialsMatrix({ onSelectMaterialForOrder }: MaterialsMatrixPro
     <section id="materials" className="py-20 bg-zinc-50 border-b border-zinc-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-8 lg:gap-12 items-center mb-12">
           <div>
             <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500 block mb-2">
               Матеріали
@@ -70,10 +71,17 @@ export function MaterialsMatrix({ onSelectMaterialForOrder }: MaterialsMatrixPro
             <h2 className="text-3xl sm:text-4xl font-bold text-zinc-950 tracking-tight">
               З чого ми друкуємо
             </h2>
+            <p className="mt-3 text-sm sm:text-base text-zinc-600 max-w-md">
+              Допоможемо підібрати правильний пластик залежно від умов роботи деталі: навантаження, температура або вологість.
+            </p>
           </div>
-          <p className="mt-3 md:mt-0 text-sm sm:text-base text-zinc-600 max-w-md">
-            Допоможемо підібрати правильний пластик залежно від умов роботи деталі: навантаження, температура або вологість.
-          </p>
+
+          <figure className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-zinc-200 border border-zinc-200">
+            <Image src="/workshop-large-part.webp" alt="Велика функціональна деталь, надрукована у майстерні" fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover" />
+            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-zinc-950/90 to-transparent px-5 pb-4 pt-12 text-sm font-semibold text-white">
+              Друкуємо габаритні та навантажені функціональні деталі
+            </figcaption>
+          </figure>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

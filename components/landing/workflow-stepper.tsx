@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 const steps = [
   {
     num: "01",
@@ -32,25 +34,35 @@ export function WorkflowStepper() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {steps.map((step) => (
-            <div
-              key={step.num}
-              className="bg-white rounded-2xl p-6 border border-zinc-200 shadow-xs flex flex-col justify-between"
-            >
-              <div>
-                <span className="text-2xl font-mono font-black text-zinc-300 block mb-3">
+        <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-6 items-stretch">
+          <figure className="relative min-h-80 overflow-hidden rounded-2xl bg-zinc-200 border border-zinc-200">
+            <Image src="/workshop-finished-piece.webp" alt="Готовий декоративний виріб після 3D-друку" fill sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover" />
+            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-zinc-950/90 to-transparent px-6 pb-5 pt-16 text-white">
+              <span className="block text-xs uppercase tracking-wider text-orange-300">Результат</span>
+              <span className="mt-1 block text-lg font-bold">Готова деталь, яку можна одразу використовувати</span>
+            </figcaption>
+          </figure>
+
+          <div className="grid gap-4">
+            {steps.map((step) => (
+              <div
+                key={step.num}
+                className="bg-white rounded-2xl p-6 border border-zinc-200 shadow-xs flex gap-5"
+              >
+                <span className="text-2xl font-mono font-black text-zinc-300 shrink-0">
                   {step.num}
                 </span>
-                <h3 className="text-lg font-bold text-zinc-950 mb-2">
-                  {step.title}
-                </h3>
-                <p className="text-sm text-zinc-600 leading-relaxed">
-                  {step.desc}
-                </p>
+                <div>
+                  <h3 className="text-lg font-bold text-zinc-950 mb-2">
+                    {step.title}
+                  </h3>
+                  <p className="text-sm text-zinc-600 leading-relaxed">
+                    {step.desc}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
       </div>
