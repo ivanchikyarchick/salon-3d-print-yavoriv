@@ -24,12 +24,12 @@ export function Hero({ onOpenOrderModal }: HeroProps) {
 
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-5xl font-black tracking-tight text-zinc-950 leading-[1.12]">
-              Якісний 3D-друк деталей, запчастин та авторських виробів
+              3D-друк, моделювання та сканування в Яворові
             </h1>
 
             {/* Clear Description */}
             <p className="mt-5 text-base sm:text-lg text-zinc-600 leading-relaxed max-w-xl">
-              Створюємо міцні вироби з інженерних матеріалів. Відновлюємо зламані шестерні та кронштейни за уламками або друкуємо ваші готові STL-моделі.
+              Друкуємо міцні деталі з інженерних матеріалів, створюємо точні 3D-моделі та скануємо фізичні вироби для подальшого відтворення.
             </p>
 
             {/* Buttons */}

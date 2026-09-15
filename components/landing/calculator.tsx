@@ -1,53 +1,61 @@
 "use client";
 
 import { useState } from "react";
-import { Send, Sparkles } from "lucide-react";
+import { Send, Scale } from "lucide-react";
 
 interface CalculatorProps {
   onOpenOrderModalWithData: (calcData: {
     taskType: string;
     material: string;
-    sizeCategory: string;
     quantity: number;
+    weightGrams: number;
+    pricePerGram: number;
     estimatedPrice: number;
   }) => void;
 }
 
-const tasks = [
-  { id: "stl", name: "Є готовий STL / STEP файл", factor: 1.0 },
-  { id: "repair", name: "Зламана деталь (потрібні заміри)", factor: 1.3 },
-  { id: "decor", name: "Декор / Модель з інтернету", factor: 1.1 },
-];
-
 const materials = [
-  { id: "petg", name: "PETG (Міцний)", pricePerGram: 3.5 },
-  { id: "pla", name: "PLA+ (Декор)", pricePerGram: 3.2 },
-  { id: "abs", name: "ABS (Термостійкий)", pricePerGram: 4.0 },
-  { id: "tpu", name: "TPU (Гума / Flex)", pricePerGram: 5.5 },
+  "PETG Pro",
+  "PLA+ Tough",
+  "ABS / ASA",
+  "TPU Flex",
+  "Nylon (PA)",
+  "PC (Полікарбонат)",
 ];
 
-const sizes = [
-  { id: "s", name: "Дрібна (до 25 г)", weight: 20, example: "шестерня, кліпса" },
-  { id: "m", name: "Середня (25-80 г)", weight: 55, example: "кронштейн, кріплення" },
-  { id: "l", name: "Велика (80-200 г)", weight: 140, example: "корпус, органайзер" },
+const priceTiers = [
+  { label: "1–50 г", rate: 7 },
+  { label: "51–100 г", rate: 6 },
+  { label: "101–150 г", rate: 5 },
+  { label: "від 151 г", rate: 4 },
 ];
+
+function getPricePerGram(weight: number) {
+  if (weight <= 50) return 7;
+  if (weight <= 100) return 6;
+  if (weight <= 150) return 5;
+  return 4;
+}
 
 export function Calculator({ onOpenOrderModalWithData }: CalculatorProps) {
-  const [selectedTask, setSelectedTask] = useState(tasks[0]);
-  const [selectedMaterial, setSelectedMaterial] = useState(materials[0]);
-  const [selectedSize, setSelectedSize] = useState(sizes[1]);
-  const [quantity, setQuantity] = useState<number>(1);
+  const [material, setMaterial] = useState(materials[0]);
+  const [weightGrams, setWeightGrams] = useState(50);
+  const [quantity, setQuantity] = useState(1);
 
-  // Price calculation
-  const unitPrice = Math.round(selectedSize.weight * selectedMaterial.pricePerGram * selectedTask.factor);
-  const totalPrice = Math.max(100, unitPrice * quantity);
+  const safeWeight = Math.max(1, Number.isFinite(weightGrams) ? weightGrams : 1);
+  const safeQuantity = Math.max(1, Number.isFinite(quantity) ? quantity : 1);
+  const totalWeight = safeWeight * safeQuantity;
+  const pricePerGram = getPricePerGram(totalWeight);
+  const totalPrice = Math.round(totalWeight * pricePerGram);
+  const isBulkOrder = totalWeight >= 3000;
 
   const handleOpenModal = () => {
     onOpenOrderModalWithData({
-      taskType: selectedTask.name,
-      material: selectedMaterial.name,
-      sizeCategory: selectedSize.name,
-      quantity,
+      taskType: "3D-друк за вагою",
+      material,
+      quantity: safeQuantity,
+      weightGrams: safeWeight,
+      pricePerGram,
       estimatedPrice: totalPrice,
     });
   };
@@ -55,135 +63,87 @@ export function Calculator({ onOpenOrderModalWithData }: CalculatorProps) {
   const handleSendTelegram = () => {
     const text = encodeURIComponent(
       `Добрий день! Цікавить 3D-друк у Яворові:\n` +
-      `- Завдання: ${selectedTask.name}\n` +
-      `- Матеріал: ${selectedMaterial.name}\n` +
-      `- Розмір: ${selectedSize.name}\n` +
-      `- Кількість: ${quantity} шт\n` +
-      `- Орієнтовна вартість: ~${totalPrice} грн`
+      `- Матеріал: ${material}\n` +
+      `- Вага однієї деталі: ${safeWeight} г\n` +
+      `- Кількість: ${safeQuantity} шт\n` +
+      `- Загальна вага: ${totalWeight} г\n` +
+      `- Тариф: ${pricePerGram} грн/г\n` +
+      `- Орієнтовна вартість: ~${totalPrice} грн` +
+      (isBulkOrder ? `\n- Партія від 3 кг: хочу обговорити індивідуальну ціну` : "")
     );
     window.open(`https://t.me?text=${text}`, "_blank");
   };
 
   return (
     <section id="calculator" className="py-20 bg-white border-b border-zinc-200">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div className="text-center max-w-xl mx-auto mb-12">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-10">
           <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500 block mb-2">
-            Калькулятор вартості
+            Калькулятор вартості друку
           </span>
           <h2 className="text-3xl font-bold text-zinc-950 tracking-tight">
-            Дізнайтеся орієнтовну ціну
+            Ціна залежить від ваги пластику
           </h2>
-          <p className="mt-2 text-sm sm:text-base text-zinc-600">
-            Оберіть базові параметри, щоб отримати попередню оцінку вартості замовлення.
+          <p className="mt-3 text-base text-zinc-600">
+            Вкажіть орієнтовну вагу однієї деталі та кількість. Остаточну вагу визначаємо після підготовки моделі до друку.
           </p>
         </div>
 
-        {/* Clean Light Box */}
         <div className="rounded-2xl border border-zinc-200 p-6 sm:p-8 bg-zinc-50/70 shadow-xs">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            
-            {/* Task */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr_1.2fr] gap-6">
             <div>
-              <label className="text-xs font-semibold text-zinc-700 block mb-2">
-                1. Тип замовлення:
-              </label>
-              <div className="space-y-2">
-                {tasks.map((t) => (
-                  <button
-                    key={t.id}
-                    onClick={() => setSelectedTask(t)}
-                    className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium border transition-colors ${
-                      selectedTask.id === t.id
-                        ? "bg-zinc-900 text-white border-zinc-900"
-                        : "bg-white text-zinc-700 border-zinc-200 hover:bg-zinc-100"
-                    }`}
-                  >
-                    {t.name}
-                  </button>
-                ))}
+              <label htmlFor="calc-material" className="text-sm font-semibold text-zinc-700 block mb-2">Матеріал</label>
+              <select id="calc-material" value={material} onChange={(event) => setMaterial(event.target.value)} className="w-full h-11 px-3 rounded-xl bg-white border border-zinc-300 text-sm text-zinc-900 focus:outline-none focus:border-zinc-800">
+                {materials.map((item) => <option key={item}>{item}</option>)}
+              </select>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label htmlFor="calc-weight" className="text-sm font-semibold text-zinc-700 block mb-2">Вага, г/шт</label>
+                <input id="calc-weight" type="number" min="1" step="1" value={weightGrams} onChange={(event) => setWeightGrams(Number(event.target.value))} className="w-full h-11 px-3 rounded-xl bg-white border border-zinc-300 text-sm text-zinc-900 focus:outline-none focus:border-zinc-800" />
+              </div>
+              <div>
+                <label htmlFor="calc-quantity" className="text-sm font-semibold text-zinc-700 block mb-2">Кількість</label>
+                <input id="calc-quantity" type="number" min="1" step="1" value={quantity} onChange={(event) => setQuantity(Number(event.target.value))} className="w-full h-11 px-3 rounded-xl bg-white border border-zinc-300 text-sm text-zinc-900 focus:outline-none focus:border-zinc-800" />
               </div>
             </div>
 
-            {/* Material */}
-            <div>
-              <label className="text-xs font-semibold text-zinc-700 block mb-2">
-                2. Матеріал:
-              </label>
-              <div className="space-y-2">
-                {materials.map((m) => (
-                  <button
-                    key={m.id}
-                    onClick={() => setSelectedMaterial(m)}
-                    className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium border transition-colors ${
-                      selectedMaterial.id === m.id
-                        ? "bg-zinc-900 text-white border-zinc-900"
-                        : "bg-white text-zinc-700 border-zinc-200 hover:bg-zinc-100"
-                    }`}
-                  >
-                    {m.name}
-                  </button>
-                ))}
+            <div className="rounded-xl bg-zinc-900 text-white p-5 flex items-center justify-between gap-4">
+              <div>
+                <span className="text-sm text-zinc-300 block">Орієнтовна вартість</span>
+                <div className="text-3xl font-black">~{totalPrice} <span className="text-lg font-normal text-zinc-300">грн</span></div>
+                <span className="text-xs text-zinc-400">{totalWeight} г × {pricePerGram} грн/г</span>
               </div>
+              <Scale className="size-7 text-zinc-400 shrink-0" />
             </div>
-
-            {/* Size */}
-            <div>
-              <label className="text-xs font-semibold text-zinc-700 block mb-2">
-                3. Розмір деталі:
-              </label>
-              <div className="space-y-2">
-                {sizes.map((s) => (
-                  <button
-                    key={s.id}
-                    onClick={() => setSelectedSize(s)}
-                    className={`w-full text-left px-3.5 py-2 rounded-xl text-xs font-medium border transition-colors ${
-                      selectedSize.id === s.id
-                        ? "bg-zinc-900 text-white border-zinc-900"
-                        : "bg-white text-zinc-700 border-zinc-200 hover:bg-zinc-100"
-                    }`}
-                  >
-                    <div>{s.name}</div>
-                    <div className={`text-[10px] ${selectedSize.id === s.id ? "text-zinc-300" : "text-zinc-400"}`}>
-                      {s.example}
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-
           </div>
 
-          {/* Bottom Summary Bar */}
-          <div className="pt-6 border-t border-zinc-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
-              <span className="text-xs text-zinc-500 block">Орієнтовна вартість:</span>
-              <div className="text-3xl font-black text-zinc-950">
-                ~{totalPrice} <span className="text-lg font-normal text-zinc-500">грн</span>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-6">
+            {priceTiers.map((tier) => (
+              <div key={tier.label} className={`rounded-xl border p-3 ${tier.rate === pricePerGram ? "bg-white border-zinc-900" : "bg-white/60 border-zinc-200"}`}>
+                <div className="text-xs text-zinc-500">{tier.label}</div>
+                <div className="text-sm font-bold text-zinc-900">{tier.rate} грн/г</div>
               </div>
-            </div>
+            ))}
+          </div>
 
+          {isBulkOrder && (
+            <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+              Загальна вага від 3 кг — можемо погодити індивідуальну ціну.
+            </div>
+          )}
+
+          <div className="pt-6 mt-6 border-t border-zinc-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-zinc-500 max-w-xl">Моделювання та 3D-сканування розраховуються окремо — 500 грн/год.</p>
             <div className="flex items-center gap-2.5 w-full sm:w-auto">
-              <button
-                onClick={handleOpenModal}
-                className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl text-xs font-semibold text-white bg-zinc-900 hover:bg-zinc-800 transition-colors cursor-pointer"
-              >
-                Оформити з цими даними
-              </button>
-
-              <button
-                onClick={handleSendTelegram}
-                className="px-4 py-2.5 rounded-xl text-xs font-medium text-zinc-700 bg-white border border-zinc-200 hover:bg-zinc-100 transition-colors flex items-center gap-1.5"
-              >
-                <Send className="size-3.5 text-zinc-700" />
-                <span>Telegram</span>
+              <button onClick={handleOpenModal} className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-zinc-900 hover:bg-zinc-800 transition-colors cursor-pointer">Оформити з цими даними</button>
+              <button onClick={handleSendTelegram} aria-label="Надіслати розрахунок у Telegram" className="px-4 py-2.5 rounded-xl text-sm font-medium text-zinc-700 bg-white border border-zinc-200 hover:bg-zinc-100 transition-colors flex items-center gap-1.5">
+                <Send className="size-4" /> Telegram
               </button>
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
   );

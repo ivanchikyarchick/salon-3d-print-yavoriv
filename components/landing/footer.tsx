@@ -14,7 +14,7 @@ export function Footer() {
                 <Layers className="size-3.5" />
               </div>
               <span className="font-bold text-sm text-zinc-900">
-                SALON 3D YAVORIV
+                SALON 3D PRINTING
               </span>
             </div>
             <p className="text-zinc-500 text-xs leading-relaxed max-w-sm">
@@ -57,7 +57,7 @@ export function Footer() {
         </div>
 
         <div className="pt-6 border-t border-zinc-100 flex flex-col sm:flex-row items-center justify-between gap-2 text-zinc-400 text-[11px]">
-          <div>© 2026 Salon 3D Print Yavoriv. Всі права захищено.</div>
+          <div>© 2026 SALON 3D PRINTING. Всі права захищено.</div>
           <div>3D-друк за моделями та зразками</div>
         </div>
       </div>

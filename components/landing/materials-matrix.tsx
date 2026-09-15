@@ -39,6 +39,22 @@ const materials = [
     temp: "до 80°C",
     useCases: "Ущільнювачі, заглушки, демпфери вібрацій, чохли",
   },
+  {
+    name: "Nylon (PA)",
+    type: "Високоміцний технічний пластик",
+    desc: "Зносостійкий і витривалий матеріал для деталей, які працюють під навантаженням, зазнають ударів або постійного тертя.",
+    badge: "Промисловий",
+    temp: "Зносостійкий",
+    useCases: "Шестерні, втулки, кріплення, функціональні механізми",
+  },
+  {
+    name: "PC (Полікарбонат)",
+    type: "Ударостійкий технічний пластик",
+    desc: "Дуже міцний і термостійкий матеріал для промислових деталей, корпусів та конструкцій із підвищеними вимогами.",
+    badge: "Максимальна міцність",
+    temp: "Ударостійкий",
+    useCases: "Промислові деталі, силові корпуси, захисні елементи",
+  },
 ];
 
 export function MaterialsMatrix({ onSelectMaterialForOrder }: MaterialsMatrixProps) {
@@ -60,7 +76,7 @@ export function MaterialsMatrix({ onSelectMaterialForOrder }: MaterialsMatrixPro
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {materials.map((mat) => (
             <div
               key={mat.name}

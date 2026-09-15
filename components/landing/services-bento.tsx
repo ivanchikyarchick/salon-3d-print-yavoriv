@@ -1,12 +1,26 @@
 "use client";
 
-import { Wrench, FileCode, Cpu, Sparkles, ArrowRight } from "lucide-react";
+import { Wrench, FileCode, Cpu, Sparkles, ArrowRight, Box, ScanLine } from "lucide-react";
 
 interface ServicesBentoProps {
   onOpenOrderModal: (serviceName?: string) => void;
 }
 
 const services = [
+  {
+    title: "3D-моделювання",
+    desc: "Створюємо готові до виробництва 3D-моделі за кресленням, ескізом, фото або фізичним зразком.",
+    icon: Box,
+    badge: "500 грн/год",
+    bullets: ["Моделі для 3D-друку", "Доопрацювання готових файлів", "Реверс-інжиніринг деталей"],
+  },
+  {
+    title: "3D-сканування",
+    desc: "Перетворюємо форму фізичного предмета на цифрову 3D-модель для копіювання, ремонту або подальшого редагування.",
+    icon: ScanLine,
+    badge: "500 грн/год",
+    bullets: ["Оцифрування деталей", "Підготовка геометрії", "Файл для моделювання або друку"],
+  },
   {
     title: "Відновлення зламаних деталей",
     desc: "Якщо деталь тріснула чи загубилася: знімаємо точні розміри з уламків штангенциркулем, проєктуємо 3D-модель та друкуємо міцний аналог.",
@@ -48,10 +62,10 @@ export function ServicesBento({ onOpenOrderModal }: ServicesBentoProps) {
             Напрямки робіт
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-zinc-950 tracking-tight">
-            Що ми виготовляємо
+            Наші послуги
           </h2>
           <p className="mt-3 text-zinc-600 text-base">
-            Працюємо як з поодинокими замовленнями на ремонт, так і з серійним виготовленням деталей.
+            Друкуємо готові моделі, створюємо нові та оцифровуємо фізичні деталі. Вартість моделювання і сканування — 500 грн/год.
           </p>
         </div>
 

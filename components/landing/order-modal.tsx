@@ -10,6 +10,8 @@ interface OrderModalProps {
     taskType?: string;
     material?: string;
     sizeCategory?: string;
+    weightGrams?: number;
+    pricePerGram?: number;
     quantity?: number;
     estimatedPrice?: number;
   } | null;
@@ -29,7 +31,7 @@ export function OrderModal({ isOpen, onClose, initialData }: OrderModalProps) {
       if (initialData.material) setMaterial(initialData.material);
       if (initialData.estimatedPrice) {
         setDetails(
-          `Розрахунок калькулятора: ~${initialData.estimatedPrice} грн (${initialData.quantity || 1} шт, ${initialData.sizeCategory || ""})`
+          `Розрахунок калькулятора: ~${initialData.estimatedPrice} грн (${initialData.quantity || 1} шт, ${initialData.weightGrams || 0} г/шт, ${initialData.pricePerGram || 0} грн/г)`
         );
       }
     }
@@ -134,6 +136,8 @@ export function OrderModal({ isOpen, onClose, initialData }: OrderModalProps) {
                   <option value="PLA+ Tough">PLA+ Tough (Для декору та гладкості)</option>
                   <option value="ABS / ASA">ABS / ASA (Термостійкий 95°C)</option>
                   <option value="TPU Flex">TPU Flex (Гнучкий еластомір)</option>
+                  <option value="Nylon (PA)">Nylon / PA (Високоміцний, зносостійкий)</option>
+                  <option value="PC (Полікарбонат)">PC / Полікарбонат (Ударостійкий)</option>
                   <option value="Порадьте матеріал">Не впевнений, підкажіть</option>
                 </select>
               </div>

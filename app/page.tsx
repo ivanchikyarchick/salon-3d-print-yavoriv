@@ -16,6 +16,8 @@ interface ModalData {
   taskType?: string;
   material?: string;
   sizeCategory?: string;
+  weightGrams?: number;
+  pricePerGram?: number;
   quantity?: number;
   estimatedPrice?: number;
 }

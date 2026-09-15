@@ -45,7 +45,7 @@ export function Header({ onOpenOrderModal }: HeaderProps) {
               </div>
               <div className="flex items-center gap-2">
                 <span className="font-bold text-base text-zinc-900 tracking-tight">
-                  SALON 3D
+                  SALON 3D PRINTING
                 </span>
                 <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-zinc-100 text-zinc-600 border border-zinc-200">
                   Яворів
