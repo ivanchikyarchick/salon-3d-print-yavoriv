@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { Wrench, FileCode, Cpu, Sparkles, ArrowRight, Box, ScanLine } from "lucide-react";
+import { SlowWorkshopVideo } from "@/components/landing/slow-workshop-video";
 
 interface ServicesBentoProps {
   onOpenOrderModal: (serviceName?: string) => void;
@@ -72,7 +72,7 @@ export function ServicesBento({ onOpenOrderModal }: ServicesBentoProps) {
           </div>
 
           <figure className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-zinc-100 border border-zinc-200">
-            <Image src="/workshop-scan-preparation.webp" alt="Підготовка деталі до точного 3D-сканування" fill sizes="(min-width: 1024px) 52vw, 100vw" className="object-cover" />
+            <SlowWorkshopVideo src="/service-scanning-slow.mp4" poster="/workshop-scan-preparation.webp" label="Підготовка деталі до точного 3D-сканування" sizes="(min-width: 1024px) 52vw, 100vw" />
             <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-zinc-950/90 to-transparent px-5 pb-4 pt-12 text-sm font-semibold text-white">
               Готуємо фізичну деталь до точного 3D-сканування
             </figcaption>

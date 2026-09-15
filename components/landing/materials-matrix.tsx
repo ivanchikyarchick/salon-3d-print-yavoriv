@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { SlowWorkshopVideo } from "@/components/landing/slow-workshop-video";
 
 interface MaterialsMatrixProps {
   onSelectMaterialForOrder: (materialName: string) => void;
@@ -77,7 +77,7 @@ export function MaterialsMatrix({ onSelectMaterialForOrder }: MaterialsMatrixPro
           </div>
 
           <figure className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-zinc-200 border border-zinc-200">
-            <Image src="/workshop-large-part.webp" alt="Велика функціональна деталь, надрукована у майстерні" fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover" />
+            <SlowWorkshopVideo src="/material-large-part-slow.mp4" poster="/workshop-large-part.webp" label="Велика функціональна деталь, надрукована у майстерні" sizes="(min-width: 1024px) 55vw, 100vw" />
             <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-zinc-950/90 to-transparent px-5 pb-4 pt-12 text-sm font-semibold text-white">
               Друкуємо габаритні та навантажені функціональні деталі
             </figcaption>
