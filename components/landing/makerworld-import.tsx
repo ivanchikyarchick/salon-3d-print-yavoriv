@@ -116,25 +116,26 @@ export function MakerWorldImport({ onOrder }: MakerWorldImportProps) {
   };
 
   return (
-    <section id="makerworld" className="py-20 bg-zinc-950 text-white border-b border-zinc-800">
+    <section id="makerworld" className="relative overflow-hidden py-20 bg-orange-50/60 text-zinc-900 border-y border-orange-100">
+      <div aria-hidden="true" className="absolute -top-28 -right-24 size-80 rounded-full bg-orange-200/35 blur-3xl" />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-14 items-start">
-          <div>
-            <span className="text-xs font-semibold uppercase tracking-wider text-orange-400 block mb-3">Імпорт із MakerWorld</span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Знайдіть модель — ми відразу порахуємо друк</h2>
-            <p className="mt-4 text-base text-zinc-400 leading-relaxed">
+          <div className="relative">
+            <span className="text-xs font-semibold uppercase tracking-wider text-orange-700 block mb-3">Імпорт із MakerWorld</span>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950">Знайдіть модель — ми відразу порахуємо друк</h2>
+            <p className="mt-4 text-base text-zinc-600 leading-relaxed">
               Відкрийте каталог MakerWorld, оберіть модель і вставте сюди її посилання. Ми підтягнемо вагу пластику та орієнтовний час із профілю друку.
             </p>
-            <a href="https://makerworld.com/en/3d-models" target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-zinc-950 text-sm font-semibold hover:bg-zinc-100 transition-colors">
+            <a href="https://makerworld.com/en/3d-models" target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-950 text-white text-sm font-semibold hover:bg-zinc-800 transition-colors shadow-sm">
               Відкрити MakerWorld <ExternalLink className="size-4" />
             </a>
-            <div className="mt-7 flex gap-3 text-sm text-zinc-400">
-              <ShieldCheck className="size-5 text-zinc-300 shrink-0" />
+            <div className="mt-7 flex gap-3 text-sm text-zinc-600">
+              <ShieldCheck className="size-5 text-orange-600 shrink-0" />
               <p>Перед замовленням перевірте ліцензію моделі. Остаточні параметри підтверджуємо після перевірки файлу.</p>
             </div>
           </div>
 
-          <div className="rounded-2xl bg-white text-zinc-900 border border-zinc-800 p-5 sm:p-6 shadow-2xl shadow-black/20">
+          <div className="relative rounded-2xl bg-white text-zinc-900 border border-zinc-200 p-5 sm:p-6 shadow-xl shadow-orange-950/10">
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
               <label htmlFor="makerworld-url" className="sr-only">Посилання на модель MakerWorld</label>
               <input id="makerworld-url" type="url" required value={url} onChange={(event) => setUrl(event.target.value)} placeholder="https://makerworld.com/en/models/…" className="flex-1 h-12 px-4 rounded-xl bg-zinc-50 border border-zinc-300 text-sm focus:outline-none focus:border-zinc-900" />

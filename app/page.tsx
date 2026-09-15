@@ -56,6 +56,11 @@ export default function Home() {
         {/* Clean Light Hero */}
         <Hero onOpenOrderModal={() => handleOpenModal()} />
 
+        {/* Primary Quote Tools */}
+        <MakerWorldImport onOrder={handleOpenModalWithCalcData} />
+
+        <Calculator onOpenOrderModalWithData={handleOpenModalWithCalcData} />
+
         {/* Core Services */}
         <ServicesBento onOpenOrderModal={handleOpenModal} />
 
@@ -63,11 +68,6 @@ export default function Home() {
         <MaterialsMatrix onSelectMaterialForOrder={handleSelectMaterial} />
 
         <ShowcaseSection />
-
-        <MakerWorldImport onOrder={handleOpenModalWithCalcData} />
-
-        {/* Simple Price Calculator */}
-        <Calculator onOpenOrderModalWithData={handleOpenModalWithCalcData} />
 
         {/* 3 Step Process */}
         <WorkflowStepper />
