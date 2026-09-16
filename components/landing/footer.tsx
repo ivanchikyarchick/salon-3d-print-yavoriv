@@ -1,6 +1,6 @@
 "use client";
 
-import { Layers, Send, Phone, MapPin } from "lucide-react";
+import { Layers, Send, Phone, MapPin, Music2 } from "lucide-react";
 
 export function Footer() {
   return (
@@ -45,11 +45,15 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="size-3.5 text-zinc-400" />
-                <a href="tel:+380670000000" className="hover:text-zinc-900">+38 (067) 000-00-00</a>
+                <a href="tel:+380974762267" className="hover:text-zinc-900">+380 97 476 22 67</a>
               </div>
               <div className="flex items-center gap-2">
                 <Send className="size-3.5 text-zinc-400" />
-                <a href="https://t.me" target="_blank" rel="noreferrer" className="hover:text-zinc-900">Telegram: @salon3d_yavoriv</a>
+                <a href="https://t.me/salon3d_yavoriv" target="_blank" rel="noreferrer" className="hover:text-zinc-900">Telegram: @salon3d_yavoriv</a>
+              </div>
+              <div className="flex items-center gap-2">
+                <Music2 className="size-3.5 text-zinc-400" />
+                <a href="https://www.tiktok.com/@salon3d_yavoriv" target="_blank" rel="noreferrer" className="hover:text-zinc-900">TikTok: @salon3d_yavoriv</a>
               </div>
             </div>
           </div>

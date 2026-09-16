@@ -74,17 +74,17 @@ export function Hero({ onOpenOrderModal }: HeroProps) {
             <div className="relative rounded-2xl bg-zinc-50 border border-zinc-200/90 p-3 shadow-sm">
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-zinc-100">
                 <Image
-                  src="/hero-filament-studio-v2.webp"
-                  alt="Котушки білого та чорного пластику для 3D-друку"
+                  src="/tiktok-cover.webp"
+                  alt="Заставка салону 3D-друку в Яворові з прикладами надрукованих деталей"
                   fill
-                  className="object-cover object-center grayscale contrast-105"
+                  className="object-cover object-center grayscale contrast-110"
                   priority
                 />
               </div>
 
               <div className="mt-3 px-2 py-1.5 flex items-center justify-between text-xs text-zinc-500">
-                <span className="font-medium text-zinc-700">Матеріали для 3D-друку</span>
-                <span>Технічні пластики</span>
+                <span className="font-medium text-zinc-700">Салон 3D друку</span>
+                <span>Яворів</span>
               </div>
             </div>
           </div>

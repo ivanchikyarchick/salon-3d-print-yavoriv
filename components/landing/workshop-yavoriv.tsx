@@ -1,6 +1,6 @@
 "use client";
 
-import { MapPin, Truck, Phone, Send } from "lucide-react";
+import { MapPin, Truck, Phone, Send, Music2 } from "lucide-react";
 
 interface WorkshopYavorivProps {
   onOpenOrderModal: () => void;
@@ -18,7 +18,7 @@ export function WorkshopYavoriv({ onOpenOrderModal }: WorkshopYavorivProps) {
               Локація та зв'язок
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-zinc-950 tracking-tight mb-4">
-              Майстерня у місті Яворів
+              Салон 3D друку в місті Яворові
             </h2>
             <p className="text-zinc-600 text-base leading-relaxed mb-6">
               Ви можете особисто принести зламану деталь для зняття розмірів або забрати готове замовлення без переплат за доставку.
@@ -48,7 +48,7 @@ export function WorkshopYavoriv({ onOpenOrderModal }: WorkshopYavorivProps) {
 
             <div className="flex flex-wrap items-center gap-3">
               <a
-                href="https://t.me"
+                href="https://t.me/salon3d_yavoriv"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-xs text-white bg-zinc-900 hover:bg-zinc-800 transition-colors"
@@ -58,11 +58,21 @@ export function WorkshopYavoriv({ onOpenOrderModal }: WorkshopYavorivProps) {
               </a>
 
               <a
-                href="tel:+380670000000"
+                href="https://www.tiktok.com/@salon3d_yavoriv"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-xs text-zinc-700 bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 transition-colors"
+              >
+                <Music2 className="size-3.5 text-zinc-600" />
+                <span>TikTok</span>
+              </a>
+
+              <a
+                href="tel:+380974762267"
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-xs text-zinc-700 bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 transition-colors"
               >
                 <Phone className="size-3.5 text-zinc-600" />
-                <span>+38 (067) 000-00-00</span>
+                <span>+380 97 476 22 67</span>
               </a>
             </div>
           </div>
