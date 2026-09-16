@@ -74,7 +74,7 @@ export function Hero({ onOpenOrderModal }: HeroProps) {
             <div className="relative rounded-2xl bg-zinc-50 border border-zinc-200/90 p-3 shadow-sm">
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-zinc-100">
                 <Image
-                  src="/hero-filament-studio.webp"
+                  src="/hero-filament-studio-v2.webp"
                   alt="Котушки білого та чорного пластику для 3D-друку"
                   fill
                   className="object-cover object-center grayscale contrast-105"
