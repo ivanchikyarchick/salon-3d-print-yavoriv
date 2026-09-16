@@ -71,7 +71,7 @@ export function Header({ onOpenOrderModal }: HeaderProps) {
             {/* Actions */}
             <div className="hidden xl:flex items-center gap-2 shrink-0">
               <a
-                href="https://t.me/salon3d_yavoriv"
+                href="https://t.me/+380974762267"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-zinc-600 hover:text-zinc-900 rounded-lg hover:bg-zinc-100 transition-colors whitespace-nowrap"
@@ -136,7 +136,7 @@ export function Header({ onOpenOrderModal }: HeaderProps) {
               Замовити 3D-друк
             </button>
             <a
-              href="https://t.me/salon3d_yavoriv"
+              href="https://t.me/+380974762267"
               target="_blank"
               rel="noreferrer"
               className="block w-full py-2.5 text-center text-sm font-medium text-zinc-700 bg-zinc-100 rounded-xl"

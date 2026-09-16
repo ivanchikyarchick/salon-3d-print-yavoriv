@@ -72,7 +72,7 @@ export function Hero({ onOpenOrderModal }: HeroProps) {
           {/* Right Column: Clean, Elegant Photo Card (No gimmicky HUD/console) */}
           <div className="lg:col-span-5">
             <div className="relative rounded-2xl bg-zinc-50 border border-zinc-200/90 p-3 shadow-sm">
-              <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-zinc-100">
+              <div className="relative aspect-square rounded-xl overflow-hidden bg-zinc-100">
                 <Image
                   src="/tiktok-cover.webp"
                   alt="Заставка салону 3D-друку в Яворові з прикладами надрукованих деталей"

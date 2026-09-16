@@ -49,11 +49,11 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Send className="size-3.5 text-zinc-400" />
-                <a href="https://t.me/salon3d_yavoriv" target="_blank" rel="noreferrer" className="hover:text-zinc-900">Telegram: @salon3d_yavoriv</a>
+                <a href="https://t.me/+380974762267" target="_blank" rel="noreferrer" className="hover:text-zinc-900">Telegram: +380 97 476 22 67</a>
               </div>
               <div className="flex items-center gap-2">
                 <Music2 className="size-3.5 text-zinc-400" />
-                <a href="https://www.tiktok.com/@salon3d_yavoriv" target="_blank" rel="noreferrer" className="hover:text-zinc-900">TikTok: @salon3d_yavoriv</a>
+                <a href="https://tiktok.com/@salon.3d.print_yavoriv?_r=1" target="_blank" rel="noreferrer" className="hover:text-zinc-900">TikTok: @salon.3d.print_yavoriv</a>
               </div>
             </div>
           </div>

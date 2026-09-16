@@ -48,7 +48,7 @@ export function WorkshopYavoriv({ onOpenOrderModal }: WorkshopYavorivProps) {
 
             <div className="flex flex-wrap items-center gap-3">
               <a
-                href="https://t.me/salon3d_yavoriv"
+                href="https://t.me/+380974762267"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-xs text-white bg-zinc-900 hover:bg-zinc-800 transition-colors"
@@ -58,7 +58,7 @@ export function WorkshopYavoriv({ onOpenOrderModal }: WorkshopYavorivProps) {
               </a>
 
               <a
-                href="https://www.tiktok.com/@salon3d_yavoriv"
+                href="https://tiktok.com/@salon.3d.print_yavoriv?_r=1"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-xs text-zinc-700 bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 transition-colors"
