@@ -116,12 +116,12 @@ export function MakerWorldImport({ onOrder }: MakerWorldImportProps) {
   };
 
   return (
-    <section id="makerworld" className="relative overflow-hidden py-20 bg-orange-50/60 text-zinc-900 border-y border-orange-100">
-      <div aria-hidden="true" className="absolute -top-28 -right-24 size-80 rounded-full bg-orange-200/35 blur-3xl" />
+    <section id="makerworld" className="relative overflow-hidden py-20 bg-zinc-50 text-zinc-900 border-y border-zinc-200">
+      <div aria-hidden="true" className="absolute -top-28 -right-24 size-80 rounded-full bg-zinc-200/60 blur-3xl" />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-14 items-start">
           <div className="relative">
-            <span className="text-xs font-semibold uppercase tracking-wider text-orange-700 block mb-3">Імпорт із MakerWorld</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500 block mb-3">Імпорт із MakerWorld</span>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950">Знайдіть модель — ми відразу порахуємо друк</h2>
             <p className="mt-4 text-base text-zinc-600 leading-relaxed">
               Відкрийте каталог MakerWorld, оберіть модель і вставте сюди її посилання. Ми підтягнемо вагу пластику та орієнтовний час із профілю друку.
@@ -130,16 +130,16 @@ export function MakerWorldImport({ onOrder }: MakerWorldImportProps) {
               Відкрити MakerWorld <ExternalLink className="size-4" />
             </a>
             <div className="mt-7 flex gap-3 text-sm text-zinc-600">
-              <ShieldCheck className="size-5 text-orange-600 shrink-0" />
+              <ShieldCheck className="size-5 text-zinc-700 shrink-0" />
               <p>Перед замовленням перевірте ліцензію моделі. Остаточні параметри підтверджуємо після перевірки файлу.</p>
             </div>
           </div>
 
-          <div className="relative rounded-2xl bg-white text-zinc-900 border border-zinc-200 p-5 sm:p-6 shadow-xl shadow-orange-950/10">
+          <div className="relative rounded-2xl bg-white text-zinc-900 border border-zinc-200 p-5 sm:p-6 shadow-xl shadow-zinc-950/10">
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
               <label htmlFor="makerworld-url" className="sr-only">Посилання на модель MakerWorld</label>
               <input id="makerworld-url" type="url" required value={url} onChange={(event) => setUrl(event.target.value)} placeholder="https://makerworld.com/en/models/…" className="flex-1 h-12 px-4 rounded-xl bg-zinc-50 border border-zinc-300 text-sm focus:outline-none focus:border-zinc-900" />
-              <button type="submit" disabled={loading} className="h-12 px-5 rounded-xl bg-orange-500 hover:bg-orange-400 disabled:opacity-60 text-zinc-950 text-sm font-bold transition-colors inline-flex items-center justify-center gap-2">
+              <button type="submit" disabled={loading} className="h-12 px-5 rounded-xl bg-zinc-950 hover:bg-zinc-800 disabled:opacity-60 text-white text-sm font-bold transition-colors inline-flex items-center justify-center gap-2">
                 {loading ? <Loader2 className="size-4 animate-spin" /> : <ArrowUpRight className="size-4" />}
                 {loading ? "Завантажуємо" : "Отримати дані"}
               </button>
@@ -166,7 +166,7 @@ export function MakerWorldImport({ onOrder }: MakerWorldImportProps) {
                         <input type="radio" name="makerworld-profile" value={profile.id} checked={profile.id === selectedProfileId} onChange={() => setSelectedProfileId(profile.id)} className="sr-only" />
                         <div className="flex justify-between gap-3">
                           <span className="text-sm font-semibold line-clamp-1">{profile.title}</span>
-                          {profile.isDefault && <span className="text-[11px] font-semibold text-orange-700 shrink-0">Основний</span>}
+                          {profile.isDefault && <span className="text-[11px] font-semibold text-zinc-700 shrink-0">Основний</span>}
                         </div>
                         <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-zinc-500">
                           <span className="inline-flex items-center gap-1"><Scale className="size-3.5" /> {profile.weightGrams} г</span>
@@ -191,7 +191,7 @@ export function MakerWorldImport({ onOrder }: MakerWorldImportProps) {
                         <div className="text-xs text-zinc-500">{totalWeight} г × {pricePerGram} грн/г</div>
                       </div>
                     </div>
-                    <button type="button" onClick={handleOrder} className="px-5 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-400 text-zinc-950 text-sm font-bold transition-colors">Замовити цю модель</button>
+                    <button type="button" onClick={handleOrder} className="px-5 py-2.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-950 text-sm font-bold transition-colors">Замовити цю модель</button>
                   </div>
                 )}
               </div>

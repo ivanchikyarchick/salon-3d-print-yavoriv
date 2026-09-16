@@ -38,15 +38,15 @@ export function Header({ onOpenOrderModal }: HeaderProps) {
             : "bg-white/50 backdrop-blur-xs py-5"
         }`}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a href="#" className="flex items-center gap-2.5 group">
+            <a href="#" className="flex items-center gap-2.5 group shrink-0">
               <div className="size-9 rounded-lg bg-zinc-900 text-white flex items-center justify-center">
                 <Layers className="size-4.5" />
               </div>
               <div className="flex items-center gap-2">
-                <span className="font-bold text-base text-zinc-900 tracking-tight">
+                <span className="font-bold text-base text-zinc-900 tracking-tight whitespace-nowrap">
                   SALON 3D PRINTING
                 </span>
                 <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-zinc-100 text-zinc-600 border border-zinc-200">
@@ -56,12 +56,12 @@ export function Header({ onOpenOrderModal }: HeaderProps) {
             </a>
 
             {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-5">
+            <nav className="hidden xl:flex items-center gap-3 2xl:gap-5 mx-5">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-sm font-medium text-zinc-600 hover:text-zinc-950 transition-colors"
+                  className="text-sm font-medium text-zinc-600 hover:text-zinc-950 transition-colors whitespace-nowrap"
                 >
                   {link.label}
                 </a>
@@ -69,12 +69,12 @@ export function Header({ onOpenOrderModal }: HeaderProps) {
             </nav>
 
             {/* Actions */}
-            <div className="hidden sm:flex items-center gap-3">
+            <div className="hidden xl:flex items-center gap-2 shrink-0">
               <a
                 href="https://t.me"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-zinc-600 hover:text-zinc-900 rounded-lg hover:bg-zinc-100 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-zinc-600 hover:text-zinc-900 rounded-lg hover:bg-zinc-100 transition-colors whitespace-nowrap"
               >
                 <Send className="size-3.5 text-zinc-700" />
                 <span>Telegram</span>
@@ -82,7 +82,7 @@ export function Header({ onOpenOrderModal }: HeaderProps) {
 
               <button
                 onClick={onOpenOrderModal}
-                className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-zinc-900 hover:bg-zinc-800 rounded-lg transition-colors cursor-pointer shadow-xs"
+                className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-zinc-900 hover:bg-zinc-800 rounded-lg transition-colors cursor-pointer shadow-xs whitespace-nowrap"
               >
                 <span>Замовити друк</span>
                 <ArrowUpRight className="size-3.5" />
@@ -90,7 +90,7 @@ export function Header({ onOpenOrderModal }: HeaderProps) {
             </div>
 
             {/* Mobile menu trigger */}
-            <div className="flex lg:hidden items-center gap-2">
+            <div className="flex xl:hidden items-center gap-2">
               <button
                 onClick={onOpenOrderModal}
                 className="px-3 py-1.5 text-xs font-semibold text-white bg-zinc-900 rounded-lg"
@@ -111,7 +111,7 @@ export function Header({ onOpenOrderModal }: HeaderProps) {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl pt-24 px-6 lg:hidden flex flex-col justify-between pb-8">
+        <div className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl pt-24 px-6 xl:hidden flex flex-col justify-between pb-8">
           <div className="flex flex-col gap-3">
             {navLinks.map((link) => (
               <a

@@ -74,17 +74,17 @@ export function Hero({ onOpenOrderModal }: HeroProps) {
             <div className="relative rounded-2xl bg-zinc-50 border border-zinc-200/90 p-3 shadow-sm">
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-zinc-100">
                 <Image
-                  src="/hero-3d-print.png"
-                  alt="3D друк деталі у Яворові"
+                  src="/workshop-printing-poster.webp"
+                  alt="Реальний процес 3D-друку у майстерні в Яворові"
                   fill
-                  className="object-cover object-center"
+                  className="object-cover object-center grayscale contrast-110"
                   priority
                 />
               </div>
 
               <div className="mt-3 px-2 py-1.5 flex items-center justify-between text-xs text-zinc-500">
-                <span className="font-medium text-zinc-700">Приклад друку: міцний PETG</span>
-                <span>FDM / SLA технології</span>
+                <span className="font-medium text-zinc-700">Реальний процес у майстерні</span>
+                <span>FDM-друк</span>
               </div>
             </div>
           </div>

@@ -38,7 +38,7 @@ export function WorkflowStepper() {
           <figure className="relative min-h-80 overflow-hidden rounded-2xl bg-zinc-200 border border-zinc-200">
             <SlowWorkshopVideo src="/result-finished-piece-slow.mp4" poster="/workshop-finished-piece.webp" label="Готовий декоративний виріб після 3D-друку" sizes="(min-width: 1024px) 42vw, 100vw" />
             <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-zinc-950/90 to-transparent px-6 pb-5 pt-16 text-white">
-              <span className="block text-xs uppercase tracking-wider text-orange-300">Результат</span>
+              <span className="block text-xs uppercase tracking-wider text-zinc-300">Результат</span>
               <span className="mt-1 block text-lg font-bold">Готова деталь, яку можна одразу використовувати</span>
             </figcaption>
           </figure>

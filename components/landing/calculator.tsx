@@ -129,7 +129,7 @@ export function Calculator({ onOpenOrderModalWithData }: CalculatorProps) {
           </div>
 
           {isBulkOrder && (
-            <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+            <div className="mt-4 rounded-xl border border-zinc-300 bg-zinc-100 px-4 py-3 text-sm text-zinc-800">
               Загальна вага від 3 кг — можемо погодити індивідуальну ціну.
             </div>
           )}
