@@ -81,8 +81,8 @@ export function Calculator({ onOpenOrderModalWithData }: CalculatorProps) {
           <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500 block mb-2">
             Калькулятор вартості друку
           </span>
-          <h2 className="text-3xl font-bold text-zinc-950 tracking-tight">
-            Ціна залежить від ваги пластику
+          <h2 className="text-2xl sm:text-3xl font-bold text-zinc-950 tracking-tight">
+            Вартість друку визначається від кількості пластику витраченого на друк деталі
           </h2>
           <p className="mt-3 text-base text-zinc-600">
             Вкажіть орієнтовну вагу однієї деталі та кількість. Остаточну вагу визначаємо після підготовки моделі до друку.
