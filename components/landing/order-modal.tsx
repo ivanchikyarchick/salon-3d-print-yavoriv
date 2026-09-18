@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, UploadCloud, Send, CheckCircle2 } from "lucide-react";
+import { X, UploadCloud, Send, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
 
 interface OrderModalProps {
   isOpen: boolean;
@@ -25,8 +25,11 @@ export function OrderModal({ isOpen, onClose, initialData }: OrderModalProps) {
   const [material, setMaterial] = useState("PETG Pro");
   const [contact, setContact] = useState("");
   const [details, setDetails] = useState("");
-  const [fileName, setFileName] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [orderId, setOrderId] = useState("");
 
   useEffect(() => {
     if (initialData) {
@@ -50,25 +53,46 @@ export function OrderModal({ isOpen, onClose, initialData }: OrderModalProps) {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setFileName(e.target.files[0].name);
+      setFile(e.target.files[0]);
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    setSubmitError("");
+
+    const formData = new FormData();
+    formData.set("task", task);
+    formData.set("material", material);
+    formData.set("contact", contact);
+    formData.set("details", details);
+    formData.set("website", "");
+    if (file) formData.set("file", file, file.name);
+
+    try {
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        body: formData,
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "Не вдалося надіслати заявку.");
+
+      setOrderId(payload.orderId || "");
+      setSubmitted(true);
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "Не вдалося надіслати заявку. Спробуйте ще раз.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleSendTelegram = () => {
-    const text = encodeURIComponent(
-      `Замовлення 3D-друку (Яворів):\n` +
-      `- Завдання: ${task || "Консультація"}\n` +
-      `- Матеріал: ${material}\n` +
-      `- Контакт: ${contact}\n` +
-      `- Файл: ${fileName || "Без файлу"}\n` +
-      `- Коментар: ${details || "-"}`
-    );
-    window.open(`https://t.me?text=${text}`, "_blank");
+    window.open("https://t.me/+380974762267", "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -92,6 +116,7 @@ export function OrderModal({ isOpen, onClose, initialData }: OrderModalProps) {
             <p className="text-xs sm:text-sm text-zinc-600 max-w-xs mx-auto">
               Майстер зв'яжеться з вами найближчим часом для уточнення деталей друку.
             </p>
+            {orderId && <p className="text-xs font-semibold text-zinc-500">Номер заявки: #{orderId}</p>}
             <div className="pt-3">
               <button
                 onClick={() => {
@@ -158,8 +183,8 @@ export function OrderModal({ isOpen, onClose, initialData }: OrderModalProps) {
                 <label className="border border-dashed border-zinc-300 hover:border-zinc-400 rounded-xl p-3 flex flex-col items-center justify-center gap-1 cursor-pointer bg-zinc-50 transition-colors">
                   <UploadCloud className="size-5 text-zinc-500" />
                   <span className="text-xs text-zinc-600">
-                    {fileName ? (
-                      <span className="font-semibold text-zinc-900">{fileName}</span>
+                    {file ? (
+                      <span className="font-semibold text-zinc-900">{file.name}</span>
                     ) : (
                       "Натисніть для вибору STL, STEP або фото"
                     )}
@@ -200,12 +225,21 @@ export function OrderModal({ isOpen, onClose, initialData }: OrderModalProps) {
                 />
               </div>
 
+              {submitError && (
+                <div role="alert" className="flex gap-2 rounded-xl border border-red-200 bg-red-50 px-3 py-2.5 text-xs text-red-700">
+                  <AlertCircle className="size-4 shrink-0 mt-0.5" />
+                  <span>{submitError}</span>
+                </div>
+              )}
+
               <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <button
                   type="submit"
-                  className="w-full py-2.5 px-4 rounded-xl font-semibold text-xs text-white bg-zinc-900 hover:bg-zinc-800 transition-colors cursor-pointer"
+                  disabled={submitting}
+                  className="w-full py-2.5 px-4 rounded-xl font-semibold text-xs text-white bg-zinc-900 hover:bg-zinc-800 disabled:opacity-60 transition-colors cursor-pointer inline-flex items-center justify-center gap-2"
                 >
-                  Надіслати заявку
+                  {submitting && <Loader2 className="size-3.5 animate-spin" />}
+                  {submitting ? "Надсилаємо…" : "Надіслати заявку"}
                 </button>
 
                 <button
@@ -214,7 +248,7 @@ export function OrderModal({ isOpen, onClose, initialData }: OrderModalProps) {
                   className="w-full py-2.5 px-4 rounded-xl font-medium text-xs text-zinc-700 bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <Send className="size-3 text-zinc-700" />
-                  <span>Відкрити в Telegram</span>
+                  <span>Написати напряму</span>
                 </button>
               </div>
             </form>

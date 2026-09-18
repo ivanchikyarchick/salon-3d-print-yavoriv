@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Send, Scale } from "lucide-react";
+import { Scale } from "lucide-react";
 
 interface CalculatorProps {
   onOpenOrderModalWithData: (calcData: {
@@ -58,20 +58,6 @@ export function Calculator({ onOpenOrderModalWithData }: CalculatorProps) {
       pricePerGram,
       estimatedPrice: totalPrice,
     });
-  };
-
-  const handleSendTelegram = () => {
-    const text = encodeURIComponent(
-      `Добрий день! Цікавить 3D-друк у Яворові:\n` +
-      `- Матеріал: ${material}\n` +
-      `- Вага однієї деталі: ${safeWeight} г\n` +
-      `- Кількість: ${safeQuantity} шт\n` +
-      `- Загальна вага: ${totalWeight} г\n` +
-      `- Тариф: ${pricePerGram} грн/г\n` +
-      `- Орієнтовна вартість: ~${totalPrice} грн` +
-      (isBulkOrder ? `\n- Партія від 3 кг: хочу обговорити індивідуальну ціну` : "")
-    );
-    window.open(`https://t.me?text=${text}`, "_blank");
   };
 
   return (
@@ -136,12 +122,7 @@ export function Calculator({ onOpenOrderModalWithData }: CalculatorProps) {
 
           <div className="pt-6 mt-6 border-t border-zinc-200 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-zinc-500 max-w-xl">Моделювання та 3D-сканування розраховуються окремо — 500 грн/год.</p>
-            <div className="flex items-center gap-2.5 w-full sm:w-auto">
-              <button onClick={handleOpenModal} className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-zinc-900 hover:bg-zinc-800 transition-colors cursor-pointer">Оформити з цими даними</button>
-              <button onClick={handleSendTelegram} aria-label="Надіслати розрахунок у Telegram" className="px-4 py-2.5 rounded-xl text-sm font-medium text-zinc-700 bg-white border border-zinc-200 hover:bg-zinc-100 transition-colors flex items-center gap-1.5">
-                <Send className="size-4" /> Telegram
-              </button>
-            </div>
+            <button onClick={handleOpenModal} className="w-full sm:w-auto px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-zinc-900 hover:bg-zinc-800 transition-colors cursor-pointer">Оформити з цими даними</button>
           </div>
         </div>
       </div>
