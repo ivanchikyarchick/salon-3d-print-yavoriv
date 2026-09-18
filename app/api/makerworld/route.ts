@@ -53,7 +53,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const design = await response.json();
+    const design: any = await response.json();
     const profiles = (Array.isArray(design.instances) ? design.instances : [])
       .map((instance: any) => {
         const plates = Array.isArray(instance?.extention?.modelInfo?.plates)

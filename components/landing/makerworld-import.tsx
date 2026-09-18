@@ -88,7 +88,9 @@ export function MakerWorldImport({ onOrder }: MakerWorldImportProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url }),
       });
-      const payload = await response.json();
+      const payload = (await response.json()) as MakerWorldResponse & {
+        error?: string;
+      };
       if (!response.ok) throw new Error(payload.error || "Не вдалося завантажити модель.");
 
       setData(payload);
