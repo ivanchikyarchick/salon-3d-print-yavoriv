@@ -1,4 +1,9 @@
 import { NextResponse } from "next/server";
+import { listTelegramSubscriberIds } from "@/db/telegram-subscribers";
+import {
+  sendTelegramDocument,
+  sendTelegramMessage,
+} from "@/lib/telegram";
 
 const MAX_FILE_SIZE = 20 * 1024 * 1024;
 const ALLOWED_EXTENSIONS = new Set([
@@ -24,32 +29,20 @@ function escapeHtml(value: string) {
     .replaceAll(">", "&gt;");
 }
 
-async function telegramRequest(
-  token: string,
-  method: "sendMessage" | "sendDocument",
-  body: BodyInit,
-  headers?: HeadersInit,
-) {
-  const response = await fetch(`https://api.telegram.org/bot${token}/${method}`, {
-    method: "POST",
-    headers,
-    body,
-    signal: AbortSignal.timeout(15_000),
-  });
-  const payload = (await response.json().catch(() => null)) as
-    | { ok?: boolean; description?: string }
-    | null;
-
-  if (!response.ok || !payload?.ok) {
-    throw new Error(payload?.description || "Telegram API request failed");
-  }
+function getStaticChatIds() {
+  return [
+    process.env.TELEGRAM_CHAT_ID,
+    ...(process.env.TELEGRAM_ADMIN_CHAT_IDS || "").split(","),
+  ]
+    .map((value) => value?.trim())
+    .filter((value): value is string => Boolean(value));
 }
 
 export async function POST(request: Request) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
+  const staticChatIds = getStaticChatIds();
 
-  if (!token || !chatId) {
+  if (!token || !staticChatIds.length) {
     return NextResponse.json(
       { error: "Приймання заявок тимчасово налаштовується. Спробуйте трохи пізніше." },
       { status: 503 },
@@ -123,25 +116,32 @@ export async function POST(request: Request) {
   ].join("\n");
 
   try {
-    await telegramRequest(
-      token,
-      "sendMessage",
-      JSON.stringify({
-        chat_id: chatId,
-        text: message,
-        parse_mode: "HTML",
-        disable_web_page_preview: true,
-      }),
-      { "Content-Type": "application/json" },
-    );
-
-    if (file) {
-      const telegramForm = new FormData();
-      telegramForm.set("chat_id", chatId);
-      telegramForm.set("caption", `Файл до замовлення #${orderId}`);
-      telegramForm.set("document", file, file.name);
-      await telegramRequest(token, "sendDocument", telegramForm);
+    let subscriberIds: string[] = [];
+    try {
+      subscriberIds = await listTelegramSubscriberIds();
+    } catch (error) {
+      console.error(
+        "Subscriber lookup failed",
+        error instanceof Error ? error.message : error,
+      );
     }
+
+    const recipients = [...new Set([...staticChatIds, ...subscriberIds])];
+    const results = await Promise.allSettled(
+      recipients.map(async (chatId) => {
+        await sendTelegramMessage(token, chatId, message, "HTML");
+        if (file) {
+          await sendTelegramDocument(
+            token,
+            chatId,
+            file,
+            `Файл до замовлення #${orderId}`,
+          );
+        }
+      }),
+    );
+    const delivered = results.filter((result) => result.status === "fulfilled").length;
+    if (!delivered) throw new Error("Order delivery failed for all recipients");
 
     return NextResponse.json({ ok: true, orderId });
   } catch (error) {

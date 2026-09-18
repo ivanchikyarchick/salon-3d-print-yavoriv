@@ -1,4 +1,7 @@
-// Intentionally empty by default.
-// Add Drizzle tables here when the site actually needs a database.
-// See examples/d1/db/schema.ts for an opt-in example.
-export {};
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+
+export const telegramSubscribers = sqliteTable("telegram_subscribers", {
+  chatId: text("chat_id").primaryKey(),
+  displayName: text("display_name"),
+  subscribedAt: integer("subscribed_at", { mode: "timestamp_ms" }).notNull(),
+});
