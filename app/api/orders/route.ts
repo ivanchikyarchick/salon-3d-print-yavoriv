@@ -50,8 +50,22 @@ export async function POST(request: Request) {
   }
 
   const requestOrigin = request.headers.get("origin");
-  if (requestOrigin && requestOrigin !== new URL(request.url).origin) {
-    return NextResponse.json({ error: "Запит відхилено." }, { status: 403 });
+  if (requestOrigin) {
+    const originUrl = new URL(requestOrigin);
+    const allowedHosts = new Set(
+      [
+        request.headers.get("x-forwarded-host"),
+        request.headers.get("host"),
+        new URL(request.url).host,
+      ]
+        .flatMap((value) => value?.split(",") ?? [])
+        .map((value) => value.trim().toLowerCase())
+        .filter(Boolean),
+    );
+
+    if (!allowedHosts.has(originUrl.host.toLowerCase())) {
+      return NextResponse.json({ error: "Запит відхилено." }, { status: 403 });
+    }
   }
 
   let formData: FormData;
